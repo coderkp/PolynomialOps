@@ -25,5 +25,8 @@ public class Polynomial {
         int j=0;
         return new int[1];
     }
+    public String post_process(int[] arr){
+        return "";
+    }
 
 }
