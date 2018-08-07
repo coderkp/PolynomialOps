@@ -77,7 +77,7 @@ public class Polynomial {
 
         for(int i = arr.length - 1; i > -1; i--){
             if(arr[i] != 0)
-                s.append(String.format("%s%d%s ", get_sign(arr[i]), arr[i], (i != 0)? "x^" + i: ""));
+                s.append(String.format("%s%d%s ", get_sign(arr[i]), arr[i], (i > 0)? "x^" + i: ""));
         }
 
         String res = s.toString();
@@ -90,11 +90,11 @@ public class Polynomial {
 
     public String multiply(String s){
         int[] ops_arr = pre_process(s);
-        int[] res_arr = new int[arr.length + ops_arr.length];
+        int[] res_arr = new int[arr.length + ops_arr.length - 1];
 
         for(int i = 0; i < arr.length; i++){
             for(int j = 0; j < ops_arr.length; j++){
-                res_arr[i + j] += arr[i] * arr[j];
+                res_arr[i + j] += arr[i] * ops_arr[j];
             }
         }
 
