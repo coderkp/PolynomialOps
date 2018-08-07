@@ -100,4 +100,63 @@ public class Polynomial {
 
         return post_process(res_arr);
     }
+
+
+    public String add(String str)
+    {
+        int [] ops_arr=pre_process(str);
+        int max_size=0,min_size=0;
+        if(ops_arr.length>arr.length)
+        {
+            max_size=ops_arr.length;
+            min_size=arr.length;
+        }
+        else
+        {
+            max_size=arr.length;
+            min_size=ops_arr.length;
+        }
+        int [] result_array=new int[max_size];
+        for(int i=0;i<min_size;i++)
+        {
+            result_array[i]=ops_arr[i]+arr[i];
+        }
+        for(int i=min_size;i<max_size;i++)
+        {
+            if(max_size==ops_arr.length)
+                result_array[i]=ops_arr[i];
+            else
+                result_array[i]=arr[i];
+        }
+        return post_process(result_array);
+    }
+
+    public String subtract(String str)
+    {
+        int [] ops_arr=pre_process(str);
+        int max_size=0,min_size=0;
+        if(ops_arr.length>arr.length)
+        {
+            max_size=ops_arr.length;
+            min_size=arr.length;
+        }
+        else
+        {
+            max_size=arr.length;
+            min_size=ops_arr.length;
+        }
+        int [] result_array=new int[max_size];
+        for(int i=0;i<min_size;i++)
+        {
+            result_array[i]=arr[i]-ops_arr[i];
+        }
+        for(int i=min_size;i<max_size;i++)
+        {
+            if(max_size==ops_arr.length)
+                result_array[i]=-ops_arr[i];
+            else
+                result_array[i]=arr[i];
+        }
+        return post_process(result_array);
+    }
 }
