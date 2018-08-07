@@ -8,5 +8,8 @@ public class Polynomial {
     {
         return new int[1];
     }
+    public String post_process(int[] arr){
+        return "";
+    }
 
 }
