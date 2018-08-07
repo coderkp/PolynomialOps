@@ -1,12 +1,11 @@
 public class Polynomial {
     private int arr[];
-    Polynomial(String s)
-    {
+
+    Polynomial(String s) {
         this.arr = pre_process(s);
-        System.out.println(arr);
     }
-    public int[] pre_process(String s)
-    {
+
+    public int[] pre_process(String s) {
         int[] processed_arr;
         String temp= "";
         if(s.charAt(0)!= '-')
@@ -23,7 +22,6 @@ public class Polynomial {
             if(s.charAt(i) != ' ')
                 temp = temp +  s.charAt(i);
         }
-        System.out.println(highestPower);
         processed_arr = new int[highestPower + 1];
         int j=0;
         while(j<temp.length())
@@ -60,14 +58,46 @@ public class Polynomial {
             }
             j+=2;
             power = temp.charAt(j) - '0';
-            System.out.println(power);
             processed_arr[power] = coeff*mf;
             j++;
         }
         return processed_arr;
     }
-    public String post_process(int[] arr){
-        return "";
+
+
+    private String get_sign(int number){
+        if(number < 0)
+            return "-";
+
+        return "+";
     }
 
+    public String post_process(int[] arr){
+        StringBuilder s = new StringBuilder();
+
+        for(int i = arr.length - 1; i > -1; i--){
+            if(arr[i] != 0)
+                s.append(String.format("%s%d%s ", get_sign(arr[i]), arr[i], (i != 0)? "x^" + i: ""));
+        }
+
+        String res = s.toString();
+
+        if(res.startsWith("+"))
+            res = res.substring(1);
+
+        return res;
+    }
+
+    public String multiply(String s){
+        int[] ops_arr = pre_process(s);
+        int[] res_arr = new int[arr.length + ops_arr.length];
+
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < ops_arr.length; j++){
+                res_arr[i + j] += arr[i] * arr[j];
+            }
+        }
+
+        return post_process(res_arr);
+    }
 }
